@@ -1,3 +1,5 @@
+"use strict";
+
 const users = ["Mango", "Poly", "Ajax", "Chelsey"];
 
 users.shift();
