@@ -9,7 +9,7 @@ do {
     numbers.push(Number(input));
   }
 } while (input !== null);
-if (numbers.length !== 0) {
+if (numbers.length) {
   for (let number of numbers) {
     total += Number(number);
   }

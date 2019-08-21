@@ -15,10 +15,10 @@ users.push("Jay", "Kiwi");
 console.log(users);
 
 const userToDelete = "Ajax";
-users.splice(userToDelete, 1);
+users.splice(users.indexOf(userToDelete), 1);
 console.log(users);
 
 const userToInsert = "Kong";
 const insertBefore = "Jay";
-users.splice(2, 0, userToInsert);
+users.splice(users.indexOf(insertBefore), 0, userToInsert);
 console.log(users);
