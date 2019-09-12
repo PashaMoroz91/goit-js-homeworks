@@ -1,4 +1,11 @@
 "use strict";
+const calculateTotalPrice = function(products, name) {
+  for (const product of products) {
+    if (product.name === name) {
+      return product.price * product.quantity;
+    }
+  }
+};
 const products = [
   { name: "Радар", price: 1300, quantity: 4 },
   { name: "Сканер", price: 2700, quantity: 3 },
