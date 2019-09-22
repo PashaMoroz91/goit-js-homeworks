@@ -10,7 +10,7 @@ user.mood = "happy";
 console.log(user);
 user.hobby = "javascript";
 console.log(user);
-user.premium = "false";
+user.premium = false;
 console.log(user);
 
 const keys = Object.keys(user);
