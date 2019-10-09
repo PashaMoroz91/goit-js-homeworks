@@ -8,9 +8,13 @@ const inventory = {
   },
 };
 
+const action = function(callback) {
+  callback();
+};
+
 const invokeInventoryOperation = function(itemName, inventoryAction) {
   console.log(`Invoking ${inventoryAction.name} opeartion on ${itemName}`);
-  inventoryAction.call(inventory);
+  action(inventoryAction.bind(inventory, itemName));
 };
 
 invokeInventoryOperation('Аптечка', inventory.add);
