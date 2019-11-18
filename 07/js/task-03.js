@@ -16,14 +16,27 @@ const images = [
   },
 ];
 
-const gallery = document.querySelector('#gallery');
-images.map(item => {
-  const itemLi = document.createElement('li');
-  itemLi.insertAdjacentHTML(
-    'afterbegin',
-    `<img src='${item.url}' alt='${item.alt}'>`,
-  );
-  gallery.appendChild(itemLi);
-});
+const list = document.querySelector("#gallery");
+function createGalery() {
+  return images.map(image => {
+    const createLi = document.createElement("li");
+    const createImg = document.createElement("img");
+    createImg.setAttribute("src", image.url);
+    createImg.setAttribute("alt", image.alt);
+    createLi.appendChild(createImg);
+    return createLi;
+  });
+}
+list.append(...createGalery());
+
+// const gallery = document.querySelector('#gallery');
+// images.map(item => {
+//   const itemLi = document.createElement('li');
+//   itemLi.insertAdjacentHTML(
+//     'afterbegin',
+//     `<img src='${item.url}' alt='${item.alt}'>`,
+//   );
+//   gallery.appendChild(itemLi);
+// });
 
 console.log(gallery);
