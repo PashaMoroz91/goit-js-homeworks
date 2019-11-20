@@ -65,4 +65,4 @@ galleryList.addEventListener('click', openLightbox);
 closeLightboxBtn.addEventListener('click', closeLightbox);
 lightboxContent.addEventListener('click', closeLightboxOverlay);
 window.addEventListener('keydown', closeLightboxEsc);
-// Collapse
+Collapse
