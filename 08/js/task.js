@@ -35,7 +35,8 @@ const openLightbox = function(event) {
     }
   });
   lightbox.classList.add('is-open');
-  lightboxImage.setAttribute('src', event.target.getAttribute('data-source'));
+  lightboxImage.src = target.dataset.source;
+  // lightboxImage.setAttribute('src', event.target.getAttribute('data-source'));
   lightboxImage.setAttribute('alt', event.target.getAttribute('alt'));
 };
 const closeLightbox = function(event) {
