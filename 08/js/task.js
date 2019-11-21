@@ -1,5 +1,5 @@
 'use strict';
-import galleryItems from './gallery-items';
+import galleryItems from './gallery-items.js';
 const galleryList = document.querySelector('.gallery');
 const createGalleryItems = galleryItems.reduce((acc, item) => {
   acc += ` <li class='gallery__item'> <a
