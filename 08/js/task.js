@@ -1,10 +1,7 @@
 'use strict';
-​
-import galleryItems from './gallery-items.js';
-​
-const galleryList = document.querySelector('.gallery');
-​
-const createGalleryItems = galleryItems.reduce((acc, item) => {
+​import galleryItems from './gallery-items.js';
+​const galleryList = document.querySelector('.gallery');
+​const createGalleryItems = galleryItems.reduce((acc, item) => {
   acc += ` <li class='gallery__item'> <a
      class="gallery__link"
      href="${item.original}"
@@ -22,17 +19,14 @@ const createGalleryItems = galleryItems.reduce((acc, item) => {
      </a></li>`;
   return acc;
 }, '');
-​
-galleryList.innerHTML = createGalleryItems;
-​
-const lightbox = document.querySelector('.lightbox');
+​galleryList.innerHTML = createGalleryItems;
+​const lightbox = document.querySelector('.lightbox');
 const lightboxImage = document.querySelector('.lightbox___image');
 const lightboxContent = document.querySelector('.lightbox__content');
 const closeLightboxBtn = document.querySelector(
   'button[data-action="close-lightbox"]',
 );
-​
-const openLightbox = function(event) {
+​const openLightbox = function(event) {
   const galleryLink = Array.from(document.querySelectorAll('.gallery__link'));
   galleryLink.forEach(item => {
     if (
@@ -46,18 +40,15 @@ const openLightbox = function(event) {
   lightboxImage.setAttribute('src', event.target.getAttribute('data-source'));
   lightboxImage.setAttribute('alt', event.target.getAttribute('alt'));
 };
-​
-const closeLightbox = function(event) {
+​const closeLightbox = function(event) {
   lightbox.classList.remove('is-open');
   lightboxImage.setAttribute('src', '');
   lightboxImage.setAttribute('alt', '');
 };
-​
-const closeLightboxOverlay = function(event) {
+​const closeLightboxOverlay = function(event) {
   if (event.target === this) closeLightbox();
 };
-​
-const closeLightboxEsc = function(event) {
+​const closeLightboxEsc = function(event) {
   if (event.keyCode === 27) closeLightbox();
 };
 ​
