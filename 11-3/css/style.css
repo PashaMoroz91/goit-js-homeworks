@@ -1,0 +1,22 @@
+.js-body {
+  background-image: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+}
+
+.timer {
+  width: 650px;
+  margin: 0 auto;
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.field {
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #f12711;
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+  color: #f5af19;
+}
