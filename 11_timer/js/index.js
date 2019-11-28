@@ -4,7 +4,7 @@ import { CountdownTimer } from './timer.js';
 
 const timer = new CountdownTimer({
   selector: '#timer-1',
-  targetDate: new Date('Oct 24, 2019 6:08'),
+  targetDate: new Date('Nov 5, 2019'),
 });
 
-timer.initTimer();
+timer.init();
