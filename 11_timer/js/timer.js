@@ -1,77 +1,73 @@
+/* Создай плагин настраиваемого таймера, который ведет обратный отсчет до предварительно определенной даты. 
+Такой плагин может использоваться в блогах и интернет-магазинах, страницах регистрации событий, во время технического обслуживания и т. д.
+
+Плагин ожидает фиксированную HTML-разметку и показывает четыре цифры: дни, часы, минуты и секунды в формате XX:XX:XX:XX. 
+Количество дней может состоять из более чем двух цифр.
+
+Плагин это класс CountdownTimer, экземпляр которого создает новый таймер с настройками.
+time - разница между targetDate и текущей датой.*/
+
 'use strict';
-const CURRENT_TIME = new Date().getTime();
 
 export class CountdownTimer {
   constructor({ selector, targetDate }) {
-    this.selector = document.querySelector(selector);
-    this.targetDate = targetDate.getTime();
-    this.deltaTime = this.targetDate - CURRENT_TIME;
+    this.targetDate = targetDate;
+    this.currentDate = Date.now();
+    this.time = this.targetDate - this.currentDate;
+    this.refs = {
+      daysHolder: document.querySelector('span[data-value="days"]'),
+      hoursHolder: document.querySelector('span[data-value="hours"]'),
+      minsHolder: document.querySelector('span[data-value="mins"]'),
+      secsHolder: document.querySelector('span[data-value="secs"]'),
+    };
   }
-
+  /* Оставшиеся дни: делим значение UTC на 1000 * 60 * 60 * 24, количество
+  миллисекунд в одном дне (миллисекунды * секунды * минуты * часы) */
   getDays() {
-    const days = Math.floor(this.deltaTime / (1000 * 60 * 60 * 24));
-    return days;
+    return Math.floor(this.time / (1000 * 60 * 60 * 24));
   }
-
+  /* Оставшиеся часы: получаем остаток от предыдущего расчета с помощью оператора
+  остатка % и делим его на количество миллисекунд в одном часе
+  (1000 * 60 * 60 = миллисекунды * минуты * секунды) */
   getHours() {
-    const hours = Math.floor(
-      (this.deltaTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-    );
-
-    return this.pad(hours);
+    return Math.floor((this.time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   }
-
-  getMinutes() {
-    const mins = Math.floor((this.deltaTime % (1000 * 60 * 60)) / (1000 * 60));
-
-    return this.pad(mins);
+  /* Оставшиеся минуты: получаем оставшиеся минуты и делим их на количество
+  миллисекунд в одной минуте (1000 * 60 = миллисекунды * секунды) */
+  getMins() {
+    return Math.floor((this.time % (1000 * 60 * 60)) / (1000 * 60));
   }
-
-  getSeconds() {
-    const secs = Math.floor((this.deltaTime % (1000 * 60)) / 1000);
-
-    return this.pad(secs);
+  /* Оставшиеся секунды: получаем оставшиеся секунды и делим их на количество
+  миллисекунд в одной секунде (1000) */
+  getSecs() {
+    return Math.floor((this.time % (1000 * 60)) / 1000);
   }
 
   pad(value) {
     return String(value).padStart(2, '0');
   }
 
-  renderTimer() {
-    const template = `
-    <div class="field">
-    <span class="value" data-value="days">${this.getDays()}</span>
-    <span class="label">Days</span>
-  </div>
-  <div class="field">
-    <span class="value" data-value="hours">${this.getHours()}</span>
-    <span class="label">Hours</span>
-  </div>
-  <div class="field">
-    <span class="value" data-value="mins">${this.getMinutes()}</span>
-    <span class="label">Minutes</span>
-  </div>
-  <div class="field">
-    <span class="value" data-value="secs">${this.getSeconds()}</span>
-    <span class="label">Seconds</span>
-  </div>
-        `;
-    this.selector.innerHTML = template;
-  }
-
   startTimer() {
-    const timer = setInterval(() => {
-      this.deltaTime = this.deltaTime - 1000;
-      this.renderTimer();
-      if (this.deltaTime <= 0) {
-        clearInterval(timer);
+    const timerID = setInterval(() => {
+      this.time = this.time - 1000;
+
+      if (this.time < 0) {
+        clearInterval(timerID);
         return;
       }
+
+      this.renderTimer();
     }, 1000);
-    return timer;
   }
 
-  init() {
+  renderTimer() {
+    this.refs.daysHolder.textContent = this.pad(this.getDays());
+    this.refs.hoursHolder.textContent = this.pad(this.getHours());
+    this.refs.minsHolder.textContent = this.pad(this.getMins());
+    this.refs.secsHolder.textContent = this.pad(this.getSecs());
+  }
+
+  initTimer() {
     this.renderTimer();
     this.startTimer();
   }

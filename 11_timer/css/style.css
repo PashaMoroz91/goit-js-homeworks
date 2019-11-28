@@ -1,33 +1,22 @@
-body {
-  text-align: center;
-  background: #00ecb9;
-  font-family: sans-serif;
-  font-weight: 100;
+.js-body {
+  background-image: linear-gradient(to right, #0f2027, #203a43, #2c5364);
 }
 
-#timer-1 {
+.timer {
+  width: 650px;
+  margin: 0 auto;
+  padding-top: 30px;
   display: flex;
-  justify-content: center;
-  font-family: sans-serif;
-  color: #fff;
-  font-weight: 100;
-  font-size: 30px;
+  justify-content: space-between;
 }
 
 .field {
-  padding: 20px;
-  border-radius: 3px;
-  background: #00bf96;
-}
-
-.value {
+  width: 120px;
   display: flex;
-  padding: 15px;
-  border-radius: 3px;
-  background: #00816a;
-}
-
-.label {
-  padding-top: 5px;
-  font-size: 16px;
+  flex-direction: column;
+  border: 2px solid #f12711;
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+  color: #f5af19;
 }
